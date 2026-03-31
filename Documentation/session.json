@@ -1,0 +1,34 @@
+{                                                    // test session configuration file
+                                                     // this file allows to fine tune test session
+    "module": {                                      // test modules configurtion
+        "include_module": [                          // include these modules, include all if list empty
+            "Nuttx_System_Arch_Os_Integration",
+            "Nuttx_System_Tools",
+            "Nuttx_System_Gdb"
+        ],
+        "exclude_module":                            // exclude these modules
+        [
+            "Nuttx_System_Arch_Os_Performance"
+        ],
+        "order": [                                   // force test modules order
+            {
+                "module": "Nuttx_System_Gdb",
+                "value": "1"
+            },
+            {
+                "module": "Nuttx_System_Tools",
+                "value": "-1"
+            }
+        ]
+    },
+    "args": {                                        // override/add keys in YAML config: section
+        "timeout": 600,                              // overrides config.timeout
+        "timeout_session": 7200,                     // overrides config.timeout_session
+        "loops": 3,                                  // overrides config.loops
+        "custom_option": "value",                    // adds new config option if absent
+        "kv": {                                      // overrides global config.kv for this session
+            "CONFIG_DEBUG_FEATURES": "y",
+            "CONFIG_IDLETHREAD_STACKSIZE": "4096"
+        }
+    }
+}

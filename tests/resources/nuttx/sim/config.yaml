@@ -1,0 +1,44 @@
+config:
+  cwd: './'
+
+product:
+
+  name: "product"
+  cores:
+    core0:
+      name: 'main'
+      device: 'sim'
+      conf_path: './tests/resources/nuttx/sim/kv_config'
+      elf_path: './tests/resources/nuttx/sim/nuttx'
+
+    core1:
+      name: 'core1'
+      device: 'sim'
+      conf_path: './tests/resources/nuttx/sim/kv_config'
+      elf_path: './tests/resources/nuttx/sim/nuttx'
+
+product1:
+
+  name: "product1"
+  cores:
+    core0:
+      name: 'product1-main'
+      device: 'sim'
+      conf_path: './tests/resources/nuttx/sim/kv_config'
+      elf_path: './tests/resources/nuttx/sim/nuttx'
+
+    core1:
+      name: 'product1-core1'
+      device: 'sim'
+      conf_path: './tests/resources/nuttx/sim/kv_config'
+      elf_path: './tests/resources/nuttx/sim/nuttx'
+
+product2:
+
+  name: "product2"
+  cores:
+    core0:
+      name: 'product2-main'
+      device: 'sim'
+      conf_path: './tests/resources/nuttx/sim/kv_config'
+      elf_path: './tests/resources/nuttx/sim/nuttx'

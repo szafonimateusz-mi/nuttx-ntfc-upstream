@@ -1,0 +1,48 @@
+name: master
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade setuptools pip tox virtualenv
+      - run: tox -e lint
+      - run: tox -e flake8
+      - run: tox -e type
+
+  test:
+    needs: lint
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python: '3.10'
+            toxenv: py
+          - os: ubuntu-latest
+            python: '3.11'
+            toxenv: py
+          - os: ubuntu-latest
+            python: '3.12'
+            toxenv: py
+          - os: ubuntu-latest
+            python: '3.13'
+            toxenv: py
+          - os: ubuntu-latest
+            python: '3.14'
+            toxenv: py
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install --upgrade setuptools pip tox virtualenv
+      - run: tox -e ${{ matrix.toxenv }}

@@ -1,0 +1,126 @@
+config:                           # common, global configuration options
+  cwd: ''                         # path of work directory. eg: /home/work
+  build_dir: ''                   # (optional) path to build directory when NTFC is used for building
+  build_env:                      # (optional) env vars passed to cmake configure/build for all cores
+    CC: ''                        # example: gcc-14
+    CXX: ''                       # example: g++-14
+  kv:                             # (optional) Kconfig overrides applied to generated .config before build
+    CONFIG_EXAMPLE: "y"           # values: y/m/n, numbers, hex, strings
+    CONFIG_NAME: "value"
+  timeout: 120                    # timeout per test case. Defaults to 120
+  timeout_session: 2400           # timeout per session. Defaults to 2400
+  loops: 1                        # specify the number of times to run each testcase. Defaults to 1
+  heartbeat:                      # (optional) heartbeat monitoring configuration
+    enabled: False                # enable heartbeat monitoring. Defaults to False
+    interval: 60                  # heartbeat check interval in seconds (min: 30). Defaults to 60
+    threshold: 3                  # consecutive failures before declaring busyloop. Defaults to 3
+  recovery:                       # device recovery configuration
+    max_retries: 3                # maximum number of reboot attempts before giving up. Defaults to 3
+    base_delay: 2.0               # initial delay in seconds between retries (doubles each attempt, capped at 60). Defaults to 2.0
+    reboot_timeout: 30            # timeout in seconds to wait for device to come back after reboot. Defaults to 30
+
+product:                          # many products can be supported in tests (product == product0)
+
+  name: "product"                 # product name
+  platform: "amp"                 # Platform type: "amp" (default) or "smp"
+  ignored_cores: ["dsp"]          # (optional) core names skipped in get_core_info. Defaults to ["dsp"]
+                                  # amp: Each core has its own device instance
+                                  # smp: All cores share the same device, automatic core switching
+  cores:                          # Cores configuration
+    core0:                        # Main core (core 0)
+      name: ''                    # Core name
+      device: ''                  # Choose a device: sim, qemu
+      exec_path: ''               # Path of emulator execution for QEMU targets eg: `qemu-system-x86_64`
+                                  # Path of serial port for serial targets, eg: `/dev/ttyACM0`
+                                  # Empty for simulator.
+      exec_args: ''               # Args for emulator execution for QEMU tragets.
+                                  # Serial port configuration for serial targets, eg '9600,n,8,1'
+                                  # Empty for simulator.
+
+                                  # NTFC can use pre-build image or build it from defconfig
+                                  # the behavior will depend on the parameters specified in config.
+      conf_path: ''               # (optional) configuration path for this core firmware
+      elf_path: ''                # (optional) NuttX ELF path for this core firmware
+      defconfig: ''               # (optional) path to build config if NTFC is used for building
+      flash: ''                   # (optional) flash command if NTFC is used for flashing
+      reboot: ''                  # (optional) System command to reset DUT, eg 'st-flash reset'
+      poweroff: ''                # (optional) System command to power off DUT
+      dcmake:                     # (optional) Defines passed to CMake build
+        DEFINE1: "VALUE1"
+        DEFINE2: "VALUE2"
+      build_env:                  # (optional) env vars passed to cmake for this core (overrides config.build_env)
+        CC: ''                    # example: gcc-14
+        CXX: ''                   # example: g++-14
+      kv:                         # (optional) per-core Kconfig overrides (higher priority than config.kv)
+        CONFIG_CORE_ONLY: "y"
+        CONFIG_EXAMPLE: "n"       # overrides same key from config.kv
+
+
+    core1:                        # (optional) Aux core 1  AMP test cases)
+      name: ''
+      device: ''
+      conf_path: ''
+      elf_path: ''
+
+    core2:                        # (optional) Aux core 2
+      name: ''
+      device: ''
+      conf_path: ''
+      elf_path: ''
+
+    core3:                        # (optional) Aux core 2
+      name: ''
+      device: ''
+      conf_path: ''
+      elf_path: ''
+
+    core4:                        # (optional) Aux core 2
+      name: ''
+      device: ''
+      conf_path: ''
+      elf_path: ''
+
+    core5:                        # (optional) Aux core 2
+      name: ''
+      device: ''
+      conf_path: ''
+      elf_path: ''
+
+product1:                         # (optional) next product configuration
+  name: "product1" 
+  cores:           
+    core0:         
+      name: ''
+      device: ''
+      conf_path: ''
+      elf_path: ''
+
+    core1:         
+      name: ''
+      device: ''
+      conf_path: ''
+      elf_path: ''
+
+    core2:         
+      name: ''
+      device: ''
+      conf_path: ''
+      elf_path: ''
+
+    core3:         
+      name: ''
+      device: ''
+      conf_path: ''
+      elf_path: ''
+
+    core4:         
+      name: ''
+      device: ''
+      conf_path: ''
+      elf_path: ''
+
+    core5:         
+      name: ''
+      device: ''
+      conf_path: ''
+      elf_path: ''

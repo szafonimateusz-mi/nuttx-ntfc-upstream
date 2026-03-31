@@ -105,7 +105,7 @@ and [Documentation/usage](Documentation/usage.rst) for detailed usage informatio
 
 Currently available test case repositories:
 
-- https://github.com/szafonimateusz-mi/nuttx-testing - NuttX RTOS
+- https://github.com/apache/nuttx-ntfc-testing - NuttX RTOS
   functionality tests
 
 For guidance on writing your own test cases, see
